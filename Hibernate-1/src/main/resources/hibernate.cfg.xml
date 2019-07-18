@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- 第一部分. 数据库连接配置 -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hibernate?&amp;useUnicode=true&amp;
+			characterEncoding=UTF8&amp;serverTimezone=GMT&amp;useSSL=FALSE</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">zhouyuxin</property>
+
+		<!-- 第二部分. hibernate信息 可选 -->
+		<!-- 2.1 输出底层sql语句 -->
+		<property name="hibernate.show_sql">true</property>
+		<!-- 2.2 输出底层格式化sql -->
+		<property name="hibernate.format_sql">true</property>
+		<!-- 2.3 hibernate帮创建数据库表，更新，如果没有就创建；有就创建 -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- 2.4 需要设置 数据库方言 dialect！ 让hibernate识别不同数据库特有的语句 。 不同数据库的方言不同，比如分页：mysql使用的是limit而orcle 
+			使用的是rownum -->
+		 <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+	<!-- <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property> -->
+
+		<!-- hibernate配置session与本地线程绑定：作用：安全 -->
+		<property name="hibernate.current_session_context_class">thread</property>
+
+
+		<!-- 3 加载所有映射文件 -->
+		<mapping resource="com/zhou/entity/User.hbm.xml" />
+		<mapping resource="com/zhou/entity/Role.hbm.xml" />
+	</session-factory>
+
+</hibernate-configuration>

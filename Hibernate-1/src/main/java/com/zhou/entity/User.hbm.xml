@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--dtd 引入约束 -->
+<hibernate-mapping package="com.zhou.entity">
+
+	<!--类名为User，表名也为User -->
+	<class name="User" table="user">
+		<!--id标签 主键映射，属性名为id，列名也为id -->
+		<id name="user_id" column="id">
+			<!--native:生成表id主键自动增长策略 -->
+			<generator class="native" />
+		</id>
+		<!--其他属性和和表字段映射，属性和列名对应 name:实体类中的属性名称 column:数据库表字段名称 -->
+		<property name="user_name" column="name" />
+		<property name="user_password" column="password" />
+		<!-- 在用户里面表示角色 ，使用set标签 name：set集合名称。 table:第三张表名称。 -->
+		<set name="roles" table="user_role" cascade="save-update,delete">
+			<!-- 配置当前映射文件在第三张表的外键名称 -->
+			<key column="userid"></key>
+			<!-- class:角色实体类全路径。 colum：角色在第三张表的外键名称。 -->
+			<many-to-many class="com.zhou.entity.Role"
+				column="roleid"></many-to-many>
+		</set>
+	</class>
+
+</hibernate-mapping>
